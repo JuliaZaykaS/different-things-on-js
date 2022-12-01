@@ -137,8 +137,11 @@ function step() {
 let isClick = false;
 const MOVEMENT_SPEED = 1;
 // let positionX = 0;
+const startPosX = 750;
+const startPosY = 50;
 let positionX = 750;
 let positionY = 50;
+
 const firstEndpoint = { x: 230, y: 70 };
 const secondEndpoint = { x: 310, y: 220 };
 let currentClickCoords = { x: 0, y: 0 };
@@ -261,8 +264,22 @@ function butterflyMove() {
     positionX -= MOVEMENT_SPEED;
     // positionY += (positionY - secondEndpoint.y) / 15;
     // positionY += MOVEMENT_SPEED;
-    positionY += MOVEMENT_SPEED / (positionY - secondEndpoint.y);
+    // positionY += MOVEMENT_SPEED / (positionY - secondEndpoint.y);
     // MOVEMENT_SPEED;
+    // const gip = Math.sqrt(
+    //   ((startPosX - currentClickCoords.x) ^ 2) +
+    //     ((startPosY - currentClickCoords.y) ^ 2)
+    // );
+    positionY += MOVEMENT_SPEED / 2.5;
+    // console.log(
+    //   "🚀 ~ file: butterfly.js:296 ~ butterflyMove ~ startPosX",
+    //   startPosX
+    // );
+    // console.log(
+    //   "🚀 ~ file: butterfly.js:297 ~ butterflyMove ~ currentClickCoords.x",
+    //   currentClickCoords.x
+    // );
+    // console.log("🚀 ~ file: butterfly.js:267 ~ butterflyMove ~ gip", gip);
 
     if (positionX > secondEndpoint.x) {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
