@@ -121,7 +121,7 @@ function step() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   //   drawFrame(cycleLoop[currentLoopIndex], 0, 0, 0);
   //   drawFrame(cycleLoop[currentLoopIndex], 0, 750, 50);
-  if (currentLoopIndex < 4) {
+  if (currentLoopIndex <= 4) {
     spriteLine = 0;
   } else spriteLine = 1;
   drawFrame(cycleLoop[currentLoopIndex], spriteLine, 750, 50);
@@ -138,33 +138,47 @@ let isClick = false;
 const MOVEMENT_SPEED = 1;
 // let positionX = 0;
 let positionX = 750;
-let positionY = 0;
+let positionY = 50;
+const firstEndpoint = { x: 230, y: 70 };
+const secondEndpoint = { x: 310, y: 220 };
+let currentClickCoords = { x: 0, y: 0 };
 
 canvas.addEventListener("click", onCanvasMouseDown, false);
 // canvas.addEventListener('mousedown', onCanvasMouseDown, false);
 // canvas.addEventListener('mousedown', onCanvasMouseDown, false);
 
 function onCanvasMouseDown(e) {
-  console.log(e);
+  // console.log(e);
+  console.log(e.x);
+  console.log(e.y);
+  currentClickCoords.x = e.x;
+  currentClickCoords.y = e.y;
   //   isClick = !isClick;
+  butterflyMove();
 
   //   isClick = !isClick;
   //   isClick = true;
   //   if (isClick) {
-  if (e.x > 155 && e.x < 350 && e.y > 30 && e.y < 200) {
-    butterflyMove();
-    //   } else {
-    //     // init();
-    //     console.log(123);
-    //     // ctx.clearRect(0, 0, canvas.width, canvas.height);
-    //     currentLoopIndex = 0;
-    //     spriteLine = 0;
-    //     // drawFrame(cycleLoop[currentLoopIndex], spriteLine, positionX, 50);
-    //     // ctx.drawImage(imgFlowers, 0, 0);
-    //     init();
-  }
+  // if (e.x > 155 && e.x < 350 && e.y > 30 && e.y < 200) {
+  //   // positionX -= MOVEMENT_SPEED;
 
-  //   butterflyMove(e.x, e.y);
+  //   butterflyMove();
+  //   // butterflyMove(e.x, e.y);
+  //   //   } else {
+  //   //     // init();
+  //   //     console.log(123);
+  //   //     // ctx.clearRect(0, 0, canvas.width, canvas.height);
+  //   //     currentLoopIndex = 0;
+  //   //     spriteLine = 0;
+  //   //     // drawFrame(cycleLoop[currentLoopIndex], spriteLine, positionX, 50);
+  //   //     // ctx.drawImage(imgFlowers, 0, 0);
+  //   //     init();
+  // }
+  // if (e.x > 255 && e.x < 445 && e.y > 185 && e.y < 390) {
+  //   butterflyMove();
+  // }
+
+  // butterflyMove(e.x, e.y);
 
   //   } else {
   //     ctx.drawImage(imgFlowers, 0, 0);
@@ -173,28 +187,155 @@ function onCanvasMouseDown(e) {
 }
 
 // function butterflyMove(x, y) {
+// console.log("🚀 ~ file: butterfly.js:178 ~ x", x);
 function butterflyMove() {
   //   ctx.clearRect(0, 0, canvas.width, canvas.height);
   //   if (isClick) {
   //   if (x > 155 && x < 350 && y > 30 && y < 200) {
-  positionX -= MOVEMENT_SPEED;
-  //   drawFrame(750, 50, positionX, positionY);
-  if (positionX > 230) {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  // console.log(
+  //   "🚀 ~ file: butterfly.js:184 ~ butterflyMove ~ positionX",
+  //   positionX
+  // );
+  // if (x < positionX) {
+  //   console.log("x<");
+  //   positionX -= MOVEMENT_SPEED;
+  //   if (positionX > firstEndpoint) {
+  //     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    ctx.drawImage(imgFlowers, 0, 0);
-    drawFrame(cycleLoop[currentLoopIndex], spriteLine, positionX, 50);
-    //   isClick = !isClick;
-  } else {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    currentLoopIndex = 0;
-    spriteLine = 0;
-    //   isClick = !isClick;
-    ctx.drawImage(imgFlowers, 0, 0);
-    drawFrame(cycleLoop[currentLoopIndex], spriteLine, 230, 70);
-    //   drawFrame(cycleLoop[currentLoopIndex], spriteLine, positionX, 50);
-    //   isClick = !isClick;
+  //     ctx.drawImage(imgFlowers, 0, 0);
+  //     drawFrame(cycleLoop[currentLoopIndex], spriteLine, positionX, 50);
+  //     //   isClick = !isClick;
+  //   } else {
+  //     ctx.clearRect(0, 0, canvas.width, canvas.height);
+  //     currentLoopIndex = 0;
+  //     spriteLine = 0;
+  //     //   isClick = !isClick;
+  //     ctx.drawImage(imgFlowers, 0, 0);
+  //     // drawFrame(cycleLoop[currentLoopIndex], spriteLine, 230, 70);
+  //     drawFrame(cycleLoop[currentLoopIndex], spriteLine, firstEndpoint, 70);
+  //     //   drawFrame(cycleLoop[currentLoopIndex], spriteLine, positionX, 50);
+  //     //   isClick = !isClick;
+  //   }
+  //   // isClick = false;
+  //   //   }
+  //   window.requestAnimationFrame(butterflyMove);
+  // } else if (x > positionX) {
+  //   console.log("x>");
+  //   positionX += MOVEMENT_SPEED;
+  // }
+  if (
+    currentClickCoords.x > 155 &&
+    currentClickCoords.x < 350 &&
+    currentClickCoords.y > 30 &&
+    currentClickCoords.y < 200
+  ) {
+    positionX -= MOVEMENT_SPEED;
+
+    if (positionX > firstEndpoint.x) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      ctx.drawImage(imgFlowers, 0, 0);
+
+      drawFrame(cycleLoop[currentLoopIndex], spriteLine, positionX, positionY);
+    } else {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      currentLoopIndex = 0;
+      spriteLine = 0;
+
+      ctx.drawImage(imgFlowers, 0, 0);
+
+      drawFrame(
+        cycleLoop[currentLoopIndex],
+        spriteLine,
+        firstEndpoint.x,
+        firstEndpoint.y
+      );
+    }
   }
+  if (
+    currentClickCoords.x > 255 &&
+    currentClickCoords.x < 445 &&
+    currentClickCoords.y > 185 &&
+    currentClickCoords.y < 390
+  ) {
+    positionX -= MOVEMENT_SPEED;
+    // positionY += (positionY - secondEndpoint.y) / 15;
+    // positionY += MOVEMENT_SPEED;
+    positionY += MOVEMENT_SPEED / (positionY - secondEndpoint.y);
+    // MOVEMENT_SPEED;
+
+    if (positionX > secondEndpoint.x) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      ctx.drawImage(imgFlowers, 0, 0);
+
+      drawFrame(cycleLoop[currentLoopIndex], spriteLine, positionX, positionY);
+    } else {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      currentLoopIndex = 0;
+      spriteLine = 0;
+
+      ctx.drawImage(imgFlowers, 0, 0);
+
+      drawFrame(
+        cycleLoop[currentLoopIndex],
+        spriteLine,
+        secondEndpoint.x,
+        secondEndpoint.y
+      );
+    }
+  }
+  //   positionX -= MOVEMENT_SPEED;
+  // //   drawFrame(750, 50, positionX, positionY);
+  // // if (positionX > 230) {
+  // //раб вариант
+  // // if (positionX > firstEndpoint) {
+  // if (positionX > firstEndpoint.x) {
+  //   ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  //   ctx.drawImage(imgFlowers, 0, 0);
+  //   // drawFrame(cycleLoop[currentLoopIndex], spriteLine, positionX, 50);
+  //   drawFrame(cycleLoop[currentLoopIndex], spriteLine, positionX, positionY);
+  //   //   isClick = !isClick;
+  // } else {
+  //   ctx.clearRect(0, 0, canvas.width, canvas.height);
+  //   currentLoopIndex = 0;
+  //   spriteLine = 0;
+  //   //   isClick = !isClick;
+  //   ctx.drawImage(imgFlowers, 0, 0);
+  //   // drawFrame(cycleLoop[currentLoopIndex], spriteLine, 230, 70);
+  //   drawFrame(
+  //     cycleLoop[currentLoopIndex],
+  //     spriteLine,
+  //     firstEndpoint.x,
+  //     firstEndpoint.y
+  //   );
+  //   //   drawFrame(cycleLoop[currentLoopIndex], spriteLine, positionX, 50);
+  //   //   isClick = !isClick;
+  // }
+  //---
+  // if (positionX > firstEndpoint) {
+  //   ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  //   ctx.drawImage(imgFlowers, 0, 0);
+  //   drawFrame(cycleLoop[currentLoopIndex], spriteLine, positionX, 50);
+  //   //   isClick = !isClick;
+  // } else if (positionX === firstEndpoint) {
+  //   ctx.clearRect(0, 0, canvas.width, canvas.height);
+  //   currentLoopIndex = 0;
+  //   spriteLine = 0;
+  //   //   isClick = !isClick;
+  //   ctx.drawImage(imgFlowers, 0, 0);
+  //   // drawFrame(cycleLoop[currentLoopIndex], spriteLine, 230, 70);
+  //   drawFrame(cycleLoop[currentLoopIndex], spriteLine, firstEndpoint, 70);
+  //   //   drawFrame(cycleLoop[currentLoopIndex], spriteLine, positionX, 50);
+  //   //   isClick = !isClick;
+  //   // } else if (positionX < firstEndpoint) {
+  //   //   ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  //   //   ctx.drawImage(imgFlowers, 0, 0);
+  //   //   drawFrame(cycleLoop[currentLoopIndex], spriteLine, positionX, 50);
+  // }
   // isClick = false;
   //   }
   window.requestAnimationFrame(butterflyMove);
