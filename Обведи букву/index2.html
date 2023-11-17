@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Gradually Fill the Letter A</title>
+    <style>
+      canvas {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="gameCanvas" width="400" height="400"></canvas>
+
+    <script>
+      // Get the canvas element and its context
+      const canvas = document.getElementById("gameCanvas");
+      const context = canvas.getContext("2d");
+
+      // Set initial circle position
+      let circleX = canvas.width / 2;
+      let circleY = canvas.height / 2;
+
+      // Variable to track mouse position
+      let mouseX = 0;
+      let mouseY = 0;
+
+      // Variable to track fill amount
+      let fillAmount = 0;
+
+      // Mouse move event listener
+      canvas.addEventListener("mousemove", handleMouseMove);
+
+      // Function to handle mouse move events
+      function handleMouseMove(event) {
+        const rect = canvas.getBoundingClientRect();
+        mouseX = event.clientX - rect.left;
+        mouseY = event.clientY - rect.top;
+
+        // Calculate the distance between the mouse and the letter "A"
+        const distance = Math.sqrt(
+          Math.pow(mouseX - 180, 2) + Math.pow(mouseY - 200, 2)
+        );
+
+        // Calculate the fill amount based on the distance
+        fillAmount = Math.max(0, 1 - distance / 40);
+      }
+
+      // Function to draw the game
+      function drawGame() {
+        // Clear the canvas
+        context.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Draw the letter "A" with gradually increasing fill
+        context.font = "30px Arial";
+        context.fillStyle = "black";
+        context.fillText("A", 180, 200);
+
+        // Draw a filled rectangle over the letter based on the fill amount
+        const fillWidth = fillAmount * 30;
+        context.fillStyle = "blue";
+        context.fillRect(180, 200 - fillWidth, 30, fillWidth);
+
+        // Request animation frame to continuously update the game
+        requestAnimationFrame(drawGame);
+      }
+
+      // Start the game
+      drawGame();
+    </script>
+  </body>
+</html>

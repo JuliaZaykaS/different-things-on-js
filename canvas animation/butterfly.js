@@ -156,7 +156,7 @@ function onCanvasMouseDown(e) {
   console.log(e.y);
   currentClickCoords.x = e.x;
   currentClickCoords.y = e.y;
-  //   isClick = !isClick;
+  isClick = !isClick;
   butterflyMove();
 
   //   isClick = !isClick;
@@ -231,6 +231,8 @@ function butterflyMove() {
     currentClickCoords.x < 350 &&
     currentClickCoords.y > 30 &&
     currentClickCoords.y < 200
+    // &&
+    // isClick
   ) {
     positionX -= MOVEMENT_SPEED;
 
@@ -240,18 +242,26 @@ function butterflyMove() {
       ctx.drawImage(imgFlowers, 0, 0);
 
       drawFrame(cycleLoop[currentLoopIndex], spriteLine, positionX, positionY);
+      // isClick = false;
     } else {
+      // console.log(123);
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       currentLoopIndex = 0;
       spriteLine = 0;
+      // isClick = false;
+
+      positionX = firstEndpoint.x;
+      positionY = firstEndpoint.y;
 
       ctx.drawImage(imgFlowers, 0, 0);
 
       drawFrame(
         cycleLoop[currentLoopIndex],
         spriteLine,
-        firstEndpoint.x,
-        firstEndpoint.y
+        // firstEndpoint.x,
+        // firstEndpoint.y
+        positionX,
+        positionY
       );
     }
   }
@@ -260,6 +270,8 @@ function butterflyMove() {
     currentClickCoords.x < 445 &&
     currentClickCoords.y > 185 &&
     currentClickCoords.y < 390
+    // &&
+    // isClick
   ) {
     positionX -= MOVEMENT_SPEED;
     // positionY += (positionY - secondEndpoint.y) / 15;
@@ -287,10 +299,12 @@ function butterflyMove() {
       ctx.drawImage(imgFlowers, 0, 0);
 
       drawFrame(cycleLoop[currentLoopIndex], spriteLine, positionX, positionY);
+      // isClick = false;
     } else {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       currentLoopIndex = 0;
       spriteLine = 0;
+      // isClick = false;
 
       ctx.drawImage(imgFlowers, 0, 0);
 

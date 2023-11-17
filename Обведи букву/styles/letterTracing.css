@@ -16,8 +16,8 @@
   -ms-flex-pack: center;
   justify-content: center;
   position: relative;
-  width: 600px;
-  height: 600px;
+  /* width: 600px;
+  height: 600px; */
 }
 
 .letterTracing_letter_img > img {
@@ -29,27 +29,29 @@
 
 .letterTracing_letter_canvas {
   display: block;
-  background: rgb(255, 255, 255);
+  /* background: rgb(255, 255, 255); */
+  background: rgb(185, 182, 182);
   cursor: pointer;
   -ms-touch-action: none;
   touch-action: none;
+  /* text-align: center; */
 }
 
 .letterTracing_letter_audio {
   display: none !important;
 }
-#letter,
-#arrows {
-  position: absolute;
-  /* width: 600px;
+/* #letter,
+#arrows { */
+/* position: absolute; */
+/* width: 600px;
   height: 600px; */
-}
+/* } */
 #letter {
   /* z-index: 5; */
 }
 
 #arrows {
-  background-color: transparent;
-  border: 1px solid black;
+  /* background-color: transparent;
+  border: 1px solid black; */
   /* z-index: 2; */
 }
